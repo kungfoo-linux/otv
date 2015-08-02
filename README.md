@@ -16,7 +16,7 @@ Funtoo AutoInstaller
 
 Esse é um script em Python para automatizar a instalação do Funtoo, a instalação é generica e não tem suporte para AMD (ainda).
 
-Essa é uma versão ALFA, então, espera pela versão final.
+Essa é uma versão ALFA, então, espere pela versão final.
 
 Para executar: python3 otv.py
 
