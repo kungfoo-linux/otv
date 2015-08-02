@@ -59,7 +59,7 @@ def sync(): # SINCRONICAR O REPOSITORIO
     os.system("chroot /mnt/funtoo emerge --sync")
 
 def fstab(): # EDITAR O FSTAB COM FORME AS PARTIÇÕES
-    arq = open("chroot /mnt/funtoo /etc/fstab", 'w')
+    arq = open("/etc/fstab", 'w')
     arq.write(
     '/dev/sda1    /             ext4    noatime        0 1\n'
     '/dev/sda2    none          swap    sw             0 0\n')
