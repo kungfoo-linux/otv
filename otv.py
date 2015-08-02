@@ -23,7 +23,7 @@ def mount(): # CRIA UM DIRETORIO E MOUNTA UMA UNIDADE NO DIRETORIO
     os.system('mkdir /mnt/funtoo')
     os.system('mount /dev/sda1 /mnt/funtoo')
 
-def stage3(): # BAIXAR O STAGE3 
+def stage3(): # BAIXAR O STAGE3
     print("""
     ========================================================================
     # Stage's                                                              #
@@ -40,7 +40,7 @@ def stage3(): # BAIXAR O STAGE3
         os.system('tar xpf stage3-latest.tar.xz')
         #os.system('rm -r stage3-*.tar.xz')
         #os.system('rm -r /mnt/funtoo/usr/src/linux-debian-*')
-    
+
     if opcao == 'funtoo-stable':
         os.system("cd /mnt/funtoo")
         os.system('wget -c http://build.funtoo.org/funtoo-stable/x86-64bit/generic_64/stage3-latest.tar.xz')
@@ -61,28 +61,30 @@ def sync(): # SINCRONICAR O REPOSITORIO
     os.system("chroot /mnt/funtoo emerge --sync")
 
 def fstab(): # EDITAR O FSTAB COM FORME AS PARTIÇÕES
-    arq = open("/etc/fstab", 'w')
+    arq = open("fstab", 'w')
     arq.write(
     '/dev/sda1    /             ext4    noatime        0 1\n'
     '/dev/sda2    none          swap    sw             0 0\n')
     arq.close()
+    os.system("chroot /mnt/funtoo mv fstab /etc/fstab")
 
 def timezone(): # DEFINIR O ESTADO
     os.system('chroot /mnt/funtoo ls /usr/share/zoneinfo/America')
     estado = str(input("Digite seu Estado Aqui: "))
-    os.sysem("chroot /mnt/funtoo ln -sf /usr/share/zoneinfo/America/%s /etc/localtime" % (estado))
+    os.system("chroot /mnt/funtoo ln -sf /usr/share/zoneinfo/America/%s /etc/localtime" % (estado))
 
 def make_cfg(): # CONFIGURAR O MAKE.CONF
     print("Digite o numero de processadores que aparecer")
     os.system('chroot /mnt/funtoo grep "processor" /proc/cpuinfo | wc -l')
     proc = int(input("Enter N°: "))
-    arq = open('chroot /mnt/funtoo /etc/portage/make.conf', 'w')
+    arq = open('make.conf', 'w')
     arq.write(
     'CFLAGS="-march=native -O2 -pipe"\n'
     'CXXFLAGS="${CFLAGS}"\n'
     'ACCEPT_KEYWORDS="~amd64\n'
     'MAKEOPTS="-j%i"\n' % (proc +1))
     arq.close()
+    os.system("chroot /mnt/funtoo mv make.conf /usr/portage/make.conf")
 
 def hostname(): # ADICIONAR O HOSTNAME USUARIO
     os.system("chroot /mnt/funtoo nano /etc/conf.d/hostname")
@@ -91,7 +93,7 @@ def idioma(): # ADCIONANDO UM IDIOMA AO SISTEMA
     os.system('chroot /mnt/funtoo echo LINGUAS=\"pt_BR\" >> /etc/make.conf')
     os.system('chroot /mnt/funtoo echo LINGUAGE=\"pt_BR\" >> /etc/make.conf')
     os.system("chroot /mnt/funtoo nano /etc/locale.gen")
-    print ('ADD LANG="pt_BR.UTF=-8"')
+    print ('ADD LANG="pt_BR.UTF-8"')
     time.sleep(3)
     os.system("chroot /mnt/funtoo nano /etc/env.d/02locale")
     os.system("chroot /mnt/funtoo nano /etc/conf.d/keymaps")
@@ -132,13 +134,13 @@ def flavor(): # HABILITAR DE ADCIONAR FLAVOR'S
     print ("Habilitado Flavor Desktop")
     time.sleep(2)
     os.system("chroot /mnt/funtoo eselect profile set-flavor funtoo/1.0/linux-gnu/flavor/desktop") # HABILITA O FLAVOR PARA DESKTOP
-    enter = input("Pressione ENTER para selecionar a DE")
+    enter = input("Pressione ENTER para selecionar a DE ")
     if enter == '':
         sub_menu()
 
 def kernel(): # BAIXA E COMPILA A KERNEL MAIS ESTAVEL
     os.system("chroot /mnt/funtoo emerge vanilla-sources")
-    os.system("chroot /mnt/funtoo cd /usr/src/linux-4.*")
+    os.system("chroot /mnt/funtoo cd /usr/src/linux")
     #os.system("chroot /mnt/funtoo wget -c http://mirror.ic.ufmt.br/slackware/slackware64-current/testing/source/config-testing-4.1.1/config-huge-4.1.1.x64")
     #os.system("chroot /mnt/funtoo mv config-huge-*.x64 .config")
     func = input("Pressione ENTER para criar sua propria .config") # FUNCAO PARA CRIAR A PROPRIA CONFIGURACAO DA KERNEL
@@ -163,7 +165,7 @@ def utm_ajustes():
     os.systsem("chroot /mnt/funtoo rc-update add syslog-ng default")
     os.system("chroot /mnt/funtoo rc-update add cronie default")
     os.system("chroot /mnt/funtoo emerge linux-firmware")
-    
+
 def passwd():
     print ("quando o sistema reinicinar você precisarar de uma senha.")
     os.system("chroot /mnt/funtoo passwd")
@@ -174,13 +176,13 @@ def user():
     os.system("chroot /mnt/funtoo useradd -m -g users -s /bin/bash %s" % (otv))
     print ("definir a senha do usuario")
     os.system("chroot /mnt/funtoo passwd %s" % (otv))
-    
+
 def final():
-    print ("Ultimos ajustes")
+    print ("Ultios ajustes")
     os.system("cd /mnt")
     os.system("umount -l funtoo")
     os.system("reboot")
-    
+
 def menu(): # MENU PRINCIPAL
     print('''
     ========================================================================
@@ -249,4 +251,3 @@ def menu(): # MENU PRINCIPAL
 
 if __name__ == '__main__':
     menu()
-
