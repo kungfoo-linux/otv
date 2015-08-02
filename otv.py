@@ -139,7 +139,7 @@ def flavor(): # HABILITAR DE ADCIONAR FLAVOR'S
         sub_menu()
 
 def kernel(): # BAIXA E COMPILA A KERNEL MAIS ESTAVEL
-    os.system("chroot /mnt/funtoo emerge vanilla-sources")
+    #os.system("chroot /mnt/funtoo emerge vanilla-sources")
     os.system("chroot /mnt/funtoo cd /usr/src/linux")
     #os.system("chroot /mnt/funtoo wget -c http://mirror.ic.ufmt.br/slackware/slackware64-current/testing/source/config-testing-4.1.1/config-huge-4.1.1.x64")
     #os.system("chroot /mnt/funtoo mv config-huge-*.x64 .config")
