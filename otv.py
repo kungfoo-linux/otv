@@ -88,8 +88,8 @@ def hostname(): # ADICIONAR O HOSTNAME USUARIO
     os.system("chroot /mnt/funtoo nano /etc/conf.d/hostname")
 
 def idioma(): # ADCIONANDO UM IDIOMA AO SISTEMA
-    os.system("chroot /mnt/funtoo echo LINGUAS=\"pt_BR\" >> /etc/make.conf")
-    os.system("chroot /mnt/funtoo echo LINGUAGE=\"pt_BR\" >> /etc/make.conf")
+    os.system('chroot /mnt/funtoo echo LINGUAS=\"pt_BR\" >> /etc/make.conf')
+    os.system('chroot /mnt/funtoo echo LINGUAGE=\"pt_BR\" >> /etc/make.conf')
     os.system("chroot /mnt/funtoo nano /etc/locale.gen")
     print ('ADD LANG="pt_BR.UTF=-8"')
     time.sleep(3)
@@ -160,7 +160,7 @@ def utm_ajustes():
     print ("O script instalarar ferramentas importates para o sistema funcionar\n")
     os.system("chroot /mnt/funtoo emerge dhcpcd syslog-ng cronie mlocate")
     os.system("chroot /mnt/funtoo rc-update add dhcpcd default")
-    os.systsem("chroot /mnt/funtoo rc-update add syslog-ng default"
+    os.systsem("chroot /mnt/funtoo rc-update add syslog-ng default")
     os.system("chroot /mnt/funtoo rc-update add cronie default")
     os.system("chroot /mnt/funtoo emerge linux-firmware")
     
