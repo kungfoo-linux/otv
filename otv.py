@@ -138,7 +138,7 @@ def flavor(): # HABILITAR DE ADCIONAR FLAVOR'S
 
 def kernel(): # BAIXA E COMPILA A KERNEL MAIS ESTAVEL
     os.system("chroot /mnt/funtoo emerge vanilla-sources")
-    os.system("chroot /mnt/funtoo cd /usr/src/linux")
+    os.system("chroot /mnt/funtoo cd /usr/src/linux-4.*")
     #os.system("chroot /mnt/funtoo wget -c http://mirror.ic.ufmt.br/slackware/slackware64-current/testing/source/config-testing-4.1.1/config-huge-4.1.1.x64")
     #os.system("chroot /mnt/funtoo mv config-huge-*.x64 .config")
     func = input("Pressione ENTER para criar sua propria .config") # FUNCAO PARA CRIAR A PROPRIA CONFIGURACAO DA KERNEL
@@ -176,7 +176,7 @@ def user():
     os.system("chroot /mnt/funtoo passwd %s" % (otv))
     
 def final():
-    print ("Ultios ajustes")
+    print ("Ultimos ajustes")
     os.system("cd /mnt")
     os.system("umount -l funtoo")
     os.system("reboot")
