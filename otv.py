@@ -35,16 +35,18 @@ def stage3(): # BAIXAR O STAGE3
     [!] Pressione '99' para voltar a Menu Principal\n""")
     opcao = str(input("Build Select: "))
     if opcao == 'funtoo-current':
+        os.system("cd /mnt/funtoo")
         os.system('wget -c http://build.funtoo.org/funtoo-current/x86-64bit/generic_64/stage3-latest.tar.xz')
-        os.system('tar -Jxvpf stage3-latest.tar.xz -C /mnt/funtoo')
-        os.system('rm -r stage3-*.tar.xz')
-        os.system('rm -r /mnt/funtoo/usr/src/linux-debian-*')
+        os.system('tar xpf stage3-latest.tar.xz')
+        #os.system('rm -r stage3-*.tar.xz')
+        #os.system('rm -r /mnt/funtoo/usr/src/linux-debian-*')
     
     if opcao == 'funtoo-stable':
+        os.system("cd /mnt/funtoo")
         os.system('wget -c http://build.funtoo.org/funtoo-stable/x86-64bit/generic_64/stage3-latest.tar.xz')
-        os.system('tar -Jxvpf stag3-latest.tar.xz -C /mnt/funtoo')
-        os.system('rm -r stage3-*.tar.xz')
-        os.system('rm -r /mnt/funtoo/usr/src/linux-debian-*')
+        os.system('tar xpf stag3-latest.tar.xz')
+        #os.system('rm -r stage3-*.tar.xz')
+        #os.system('rm -r /mnt/funtoo/usr/src/linux-debian-*')
 
     if opcao == '99':
         menu()
