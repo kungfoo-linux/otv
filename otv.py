@@ -146,11 +146,11 @@ def kernel(): # BAIXA E COMPILA A KERNEL MAIS ESTAVEL
     func = input("Pressione ENTER para criar sua propria .config") # FUNCAO PARA CRIAR A PROPRIA CONFIGURACAO DA KERNEL
     if func == '':
         os.system("chroot /mnt/funtoo/ make menuconfig")
-    os.system("chroot /mnt/funtoo make all")
-    os.system("chroot /mnt/funtoo make modules_install")
-    os.system("chroot /mnt/funtoo cp arch/x86/boot/bzImage /boot/kernel-4.x-FUNTOO")
-    os.system("chroot /mnt/funtoo cd /boot && ls -l")
-    os.system("chroot /mnt/funtoo ln -s kernel-4.x-FUNTOO bzImage")
+        os.system("chroot /mnt/funtoo make all")
+        os.system("chroot /mnt/funtoo make modules_install")
+        os.system("chroot /mnt/funtoo cp arch/x86/boot/bzImage /boot/kernel-4.x-FUNTOO")
+        os.system("chroot /mnt/funtoo cd /boot && ls -l")
+        os.system("chroot /mnt/funtoo ln -s kernel-4.x-FUNTOO bzImage")
 
 
 def boot(): # BAIXA O BOOT-UPDATE UM PACOTE QUE CONTEM O GRUB E INSTALA
