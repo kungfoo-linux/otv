@@ -84,7 +84,7 @@ def make_cfg(): # CONFIGURAR O MAKE.CONF
     'ACCEPT_KEYWORDS="~amd64\n'
     'MAKEOPTS="-j%i"\n' % (proc +1))
     arq.close()
-    os.system("chroot /mnt/funtoo mv make.conf /usr/portage/make.conf")
+    os.system("chroot /mnt/funtoo mv make.conf /etc/make.conf")
 
 def hostname(): # ADICIONAR O HOSTNAME USUARIO
     os.system("chroot /mnt/funtoo nano /etc/conf.d/hostname")
